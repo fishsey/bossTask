@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shopping.dao.ShoppingCarDao">
+
+    <select id="getShoppingCars" resultType="com.shopping.entity.ShoppingCar">
+        SELECT *
+        FROM shoppingcar
+        WHERE userId = #{userId};
+    </select>
+
+    <select id="getShoppingCar" resultType="com.shopping.entity.ShoppingCar">
+        SELECT *
+        FROM shoppingcar
+        WHERE userId = #{param1} AND productId = #{param2};
+    </select>
+
+    <delete id="deleteShoppingCar">
+         DELETE FROM shoppingcar
+         WHERE userId = #{param1} AND productId = #{param2};
+    </delete>
+
+
+    <insert id="addShoppingCar" parameterType="com.shopping.entity.ShoppingCar">
+        INSERT INTO shoppingcar(userId, productId, productPrice, counts)
+        VALUES (#{userId}, #{productId}, #{productPrice}, #{counts});
+    </insert>
+
+    <update id="updateShoppingCar" parameterType="com.shopping.entity.ShoppingCar">
+        UPDATE shoppingcar
+        SET counts=#{counts}, productPrice=#{productPrice}
+        WHERE userId = #{userId} AND productId = #{productId}
+    </update>
+
+
+    <update id="createNewTable">
+        create table if NOT EXISTS shoppingCar(
+  userId int not null,
+  productId int not null,
+  productPrice int not null,
+  counts int not null,
+  primary key (userId,productId),
+  foreign key (userId) references users(id),
+  foreign key (productId) references products(id)
+);
+    </update>
+
+
+</mapper>
+

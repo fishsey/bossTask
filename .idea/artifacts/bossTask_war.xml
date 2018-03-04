@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bossTask:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="bossTask.war">
+      <element id="artifact" artifact-name="bossTask:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring-4.3.14.RELEASE" />
+          <element id="library" level="project" name="Spring MVC-4.3.14.RELEASE" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

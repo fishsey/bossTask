@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shopping.dao.UserDao">
+
+    <select id="getUser" resultType="com.shopping.entity.User">
+        SELECT *
+        FROM users
+        WHERE name = #{name} OR id = #{id};
+    </select>
+
+
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users(role, name, nickName, password, phoneNumber)
+        VALUES (#{role}, #{name}, #{nickName}, #{password}, #{phoneNumber});
+    </insert>
+
+
+    <update id="createNewTable">
+        create table if NOT EXISTS users
+        (
+          id int not null AUTO_INCREMENT,
+          name varchar(30) not null,
+          password varchar(50) not null,
+          nickName varchar(30) not null,
+          phoneNumber varchar(20) not null,
+          role int not null,
+          primary key(id),
+          unique(name)
+        );
+    </update>
+
+
+
+</mapper>
+

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shopping.dao.ShoppingRecordDao">
+
+    <insert id="addShoppingRecord" parameterType="com.shopping.entity.ShoppingRecord">
+        INSERT IGNORE INTO shoppingRecord(userId, productId, time, orderStatus, productPrice,counts)
+        VALUES (#{userId}, #{productId}, #{time}, #{orderStatus}, #{productPrice}, #{counts});
+    </insert>
+
+
+    <select id="getShoppingRecords" resultType="com.shopping.entity.ShoppingRecord">
+        SELECT *
+        FROM shoppingRecord
+        WHERE userId = #{userId};
+    </select>
+
+    <select id="getShoppingProducts" resultType="Integer">
+        SELECT productId
+        FROM shoppingRecord
+        WHERE userId = #{userId};
+    </select>
+
+    <select id="getAllShoppingProducts" resultType="Integer">
+        SELECT DISTINCT productId
+        FROM shoppingRecord;
+    </select>
+
+    <select id="getshoppingCounts" resultType="Integer">
+        SELECT sum(counts)
+        FROM shoppingRecord
+        WHERE productId = #{productId};
+    </select>
+
+    <select id="getUserProductRecord"  resultType="com.shopping.entity.ShoppingRecord">
+        SELECT *
+        FROM shoppingRecord
+        WHERE userId = #{param1} AND productId = #{param2};
+    </select>
+
+
+
+    <update id="createNewTable">
+        create table if NOT EXISTS shoppingRecord(
+  userId int not null,
+  productId INT not null,
+  time varchar(20) not null,
+  orderStatus int not null,
+  productPrice int not null,
+  counts int not null,
+  primary key (userId, productId, time),
+  foreign key (userId) references users(id),
+  foreign key (productId) references products(id)
+);
+    </update>
+
+</mapper>
+

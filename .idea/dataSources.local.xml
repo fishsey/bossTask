@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="bossTask" uuid="0565e4ab-348a-4266-a05a-cbbe1892155c">
+      <secret-storage>master_key</secret-storage>
+      <user-name>fishsey</user-name>
+      <schema-pattern>bosstask.*</schema-pattern>
+      <default-schemas>bosstask.*</default-schemas>
+    </data-source>
+  </component>
+</project>
